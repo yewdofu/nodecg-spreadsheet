@@ -6,17 +6,12 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export interface Configschema {
-	spreadsheetId: string;
-	serviceAccountKeyFile: string;
+export interface SyncStatus {
+	syncing: boolean;
+	lastAttemptAt: string | null;
+	lastSuccessAt: string | null;
+	error: string | null;
+	autoSyncEnabled: boolean;
+	intervalSeconds: number;
 	timeZone: string;
-	sheets: {
-		players: string;
-		commentators: string;
-		schedules: string;
-	};
-	autoSync: {
-		enabled: boolean;
-		intervalSeconds: number;
-	};
 }

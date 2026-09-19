@@ -1,6 +1,7 @@
 import type NodeCG from "@nodecg/types";
-import {example} from "./example";
+import type {Configschema} from "../types/generated/configschema";
+import {setupSpreadsheet} from "./spreadsheet";
 
-export default function (nodecg: NodeCG.ServerAPI) {
-	example(nodecg);
+export default function (nodecg: NodeCG.ServerAPI<Configschema>) {
+	setupSpreadsheet(nodecg);
 }

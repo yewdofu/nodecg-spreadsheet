@@ -8,5 +8,6 @@ node_modules
 /cfg
 /db
 /logs
+/shared/dist
 
 *.tsbuildinfo

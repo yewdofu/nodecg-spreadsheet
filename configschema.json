@@ -1,5 +1,55 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
-	"properties": {}
+	"additionalProperties": false,
+	"properties": {
+		"spreadsheetId": { "type": "string", "default": "" },
+		"serviceAccountKeyFile": { "type": "string", "default": "" },
+		"timeZone": { "type": "string", "default": "Asia/Tokyo" },
+		"sheets": {
+			"type": "object",
+			"additionalProperties": false,
+			"default": {},
+			"properties": {
+				"players": {
+					"type": "string",
+					"minLength": 1,
+					"default": "プレイヤー一覧"
+				},
+				"commentators": {
+					"type": "string",
+					"minLength": 1,
+					"default": "解説者一覧"
+				},
+				"schedules": {
+					"type": "string",
+					"minLength": 1,
+					"default": "スケジュール"
+				}
+			},
+			"required": ["players", "commentators", "schedules"]
+		},
+		"autoSync": {
+			"type": "object",
+			"additionalProperties": false,
+			"default": {},
+			"properties": {
+				"enabled": { "type": "boolean", "default": false },
+				"intervalSeconds": {
+					"type": "integer",
+					"minimum": 1,
+					"maximum": 2147483,
+					"default": 60
+				}
+			},
+			"required": ["enabled", "intervalSeconds"]
+		}
+	},
+	"required": [
+		"spreadsheetId",
+		"serviceAccountKeyFile",
+		"timeZone",
+		"sheets",
+		"autoSync"
+	]
 }

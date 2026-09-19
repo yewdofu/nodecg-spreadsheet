@@ -9,9 +9,8 @@ export default defineConfig(() => {
 		plugins: [
 			react(),
 			nodecg({
-				bundleName: "nodecg-bundle-template",
-				graphics: "./src/browser/graphics/views/**/*.tsx",
-				dashboard: "./src/browser/dashboard/views/**/*.tsx",
+				bundleName: "nodecg-spreadsheet",
+				dashboard: "./src/browser/dashboard/views/Spreadsheet.tsx",
 				extension: {
 					input: "./src/extension/index.ts",
 					plugins: [nodeExternals(), esbuild()],

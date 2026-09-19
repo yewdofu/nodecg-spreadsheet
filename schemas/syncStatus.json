@@ -1,0 +1,33 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "SyncStatus",
+	"default": {
+		"syncing": false,
+		"lastAttemptAt": null,
+		"lastSuccessAt": null,
+		"error": null,
+		"autoSyncEnabled": false,
+		"intervalSeconds": 60,
+		"timeZone": "Asia/Tokyo"
+	},
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"syncing": { "type": "boolean" },
+		"lastAttemptAt": { "type": ["string", "null"] },
+		"lastSuccessAt": { "type": ["string", "null"] },
+		"error": { "type": ["string", "null"] },
+		"autoSyncEnabled": { "type": "boolean" },
+		"intervalSeconds": { "type": "integer", "minimum": 1 },
+		"timeZone": { "type": "string" }
+	},
+	"required": [
+		"syncing",
+		"lastAttemptAt",
+		"lastSuccessAt",
+		"error",
+		"autoSyncEnabled",
+		"intervalSeconds",
+		"timeZone"
+	]
+}

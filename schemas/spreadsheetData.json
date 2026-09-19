@@ -1,0 +1,95 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "SpreadsheetData",
+	"default": {
+		"revision": 0,
+		"updatedAt": null,
+		"source": null,
+		"players": [],
+		"commentators": [],
+		"schedules": [],
+		"selectedScheduleId": null
+	},
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"revision": { "type": "integer", "minimum": 0 },
+		"updatedAt": { "type": ["string", "null"] },
+		"source": { "enum": ["sheet", "dashboard", null] },
+		"players": { "type": "array", "items": { "$ref": "#/definitions/person" } },
+		"commentators": {
+			"type": "array",
+			"items": { "$ref": "#/definitions/person" }
+		},
+		"schedules": {
+			"type": "array",
+			"items": { "$ref": "#/definitions/schedule" }
+		},
+		"selectedScheduleId": { "type": ["string", "null"] }
+	},
+	"required": [
+		"revision",
+		"updatedAt",
+		"source",
+		"players",
+		"commentators",
+		"schedules",
+		"selectedScheduleId"
+	],
+	"definitions": {
+		"person": {
+			"title": "Person",
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"id": { "type": "string", "minLength": 1 },
+				"name": { "type": "string", "minLength": 1 },
+				"twitch_id": { "type": "string" },
+				"twitter_id": { "type": "string" },
+				"youtube_id": { "type": "string" },
+				"game_name": { "type": "string" },
+				"category": { "type": "string" }
+			},
+			"required": [
+				"id",
+				"name",
+				"twitch_id",
+				"twitter_id",
+				"youtube_id",
+				"game_name",
+				"category"
+			]
+		},
+		"schedule": {
+			"title": "Schedule",
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"id": { "type": "string", "minLength": 1 },
+				"start_time": { "type": "string" },
+				"startsAt": { "type": ["string", "null"] },
+				"game_name": { "type": "string", "minLength": 1 },
+				"release_year": { "type": "string" },
+				"category": { "type": "string" },
+				"estimate": { "type": "string" },
+				"players": { "type": "array", "items": { "type": "string" } },
+				"commentators": { "type": "array", "items": { "type": "string" } },
+				"playerIds": { "type": "array", "items": { "type": "string" } },
+				"commentatorIds": { "type": "array", "items": { "type": "string" } }
+			},
+			"required": [
+				"id",
+				"start_time",
+				"startsAt",
+				"game_name",
+				"release_year",
+				"category",
+				"estimate",
+				"players",
+				"commentators",
+				"playerIds",
+				"commentatorIds"
+			]
+		}
+	}
+}

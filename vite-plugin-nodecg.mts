@@ -136,10 +136,6 @@ export default async ({
 		const dashboardOutdir = path.join(config.root, "dashboard");
 
 		await Promise.all([
-			fs.rm(graphicsOutdir, {recursive: true, force: true}),
-			fs.rm(dashboardOutdir, {recursive: true, force: true}),
-		]);
-		await Promise.all([
 			fs.mkdir(graphicsOutdir, {recursive: true}),
 			fs.mkdir(dashboardOutdir, {recursive: true}),
 		]);
@@ -165,7 +161,7 @@ export default async ({
 				head.push(`
 					<script type="module">
 						import RefreshRuntime from '${new URL(
-							path.join(config.base, "@react-refresh"),
+							path.posix.join(config.base, "@react-refresh"),
 							origin,
 						)}'
 						RefreshRuntime.injectIntoGlobalHook(window)
@@ -176,13 +172,13 @@ export default async ({
 				`);
 				head.push(
 					`<script type="module" src="${new URL(
-						path.join(config.base, "@vite/client"),
+						path.posix.join(config.base, "@vite/client"),
 						origin,
 					)}"></script>`,
 				);
 				head.push(
 					`<script type="module" src="${new URL(
-						path.join(config.base, input),
+						path.posix.join(config.base, input),
 						origin,
 					)}"></script>`,
 				);
@@ -196,7 +192,7 @@ export default async ({
 					if (chunk.css) {
 						for (const css of chunk.css) {
 							head.push(
-								`<link rel="stylesheet" href="${path.join(config.base, css)}">`,
+								`<link rel="stylesheet" href="${path.posix.join(config.base, css)}">`,
 							);
 						}
 					}
@@ -216,7 +212,7 @@ export default async ({
 
 				if (entryChunk?.file) {
 					head.push(
-						`<script type="module" src="${path.join(
+						`<script type="module" src="${path.posix.join(
 							config.base,
 							entryChunk.file,
 						)}"></script>`,
@@ -256,6 +252,7 @@ export default async ({
 						: `/bundles/${bundleName}/shared/dist`,
 				server: {host, port, origin},
 				build: {
+					emptyOutDir: false,
 					rollupOptions: {
 						input: [...graphicsInputs, ...dashboardInputs],
 					},
